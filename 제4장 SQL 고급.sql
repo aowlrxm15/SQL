@@ -148,7 +148,7 @@ sum(`sale`) as `2018년도 1월 매출총합
 
 #실습 4-8
 select 
-	sum(`sale`) as `총합`,
+	sum(`sale`) as `합계`,
 	avg(`sale`) as `평균`
 from `sales` 
 where `year`=2019 and `month`=2 and `sale` >= 50000;
@@ -160,11 +160,29 @@ select
 from `sales` where `tear`=2020;
 
 #실습 4-10
+select * from `` group by ``;
+select * from `` group by ``;
+select * from `` group by ``, ``;
+select ``, count(*)  as `건수` from `sales group by ``;
+select ``, sum(sale) as `합계` from `sales group by ``;
+select ``, avg(sale) as `평균` from `sales group by ``;
+
+select ``, `` , sum(sale) as `합계`
+
+
+select ``, `` , sum(sale) as `합계`
+
+
+select ``, `` , sum(sale) as `합계`
+
+
 
 
 #실습 4-11
+select ``, sum(sale) as `` from ``
 
 
+select ``, ``, sum(sale) as ``
 #실습 4-12
 
 
