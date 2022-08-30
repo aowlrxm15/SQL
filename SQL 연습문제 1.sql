@@ -46,24 +46,24 @@ insert into `customer`  value ('c108', '이순신', '010-1234-1008', '서울시 
 insert into `customer`  value ('c109', '송상현', '010-1234-1009', '부산시 동래구', now());
 insert into `customer`  value ('c112', '정약용', '010-1234-1010', '경기도 광주시', now());
 
-insert into `product` value ('새우깡', '5000', '1500', '농심');
-insert into `product` value ('초코파이', '2500', '2500', '오리온');
-insert into `product` value ('포카칩', '3600', '1700', '오리온');
-insert into `product` value ('양파링', '1250', '1800', '농심');
-insert into `product` value ('죠리퐁', '2200', null, '크라운');
-insert into `product` value ('마카렛트', '3500', '3500', '롯데');
-insert into `product` value ('뿌셔뿌셔', '1650', '1200', '오뚜기');
+insert into `product` value (0, '새우깡', '5000', '1500', '농심');
+insert into `product` value (0, '초코파이', '2500', '2500', '오리온');
+insert into `product` value (0, '포카칩', '3600', '1700', '오리온');
+insert into `product` value (0, '양파링', '1250', '1800', '농심');
+insert into `product` value (0, '죠리퐁', '2200', null, '크라운');
+insert into `product` value (0, '마카렛트', '3500', '3500', '롯데');
+insert into `product` value (0, '뿌셔뿌셔', '1650', '1200', '오뚜기');
 
-insert into `order` value ('c102', '3', '2', now());
-insert into `order` value ('c101', '4', '1', now());
-insert into `order` value ('c108', '1', '1', now());
-insert into `order` value ('c109', '6', '5', now());
-insert into `order` value ('c102', '2', '1', now());
-insert into `order` value ('c101', '7', '3', now());
-insert into `order` value ('c110', '1', '2', now());
-insert into `order` value ('c104', '2', '4', now());
-insert into `order` value ('c102', '1', '3', now());
-insert into `order` value ('c107', '6', '1', now());
+insert into `order` value (0, 'c102', '3', '2', now());
+insert into `order` value (0, 'c101', '4', '1', now());
+insert into `order` value (0, 'c108', '1', '1', now());
+insert into `order` value (0, 'c109', '6', '5', now());
+insert into `order` value (0, 'c102', '2', '1', now());
+insert into `order` value (0, 'c101', '7', '3', now());
+insert into `order` value (0, 'c110', '1', '2', now());
+insert into `order` value (0, 'c104', '2', '4', now());
+insert into `order` value (0, 'c102', '1', '3', now());
+insert into `order` value (0, 'c107', '6', '1', now());
 
 #실습 1-4
 select * from `customer`;
@@ -81,70 +81,70 @@ select `company` from `product`;
 SELECT DISTINCT `company` FROM `product`;
 
 #실습 1-9
-select `product`, `price` from `product`;
+select `prodname`, `price` from `product`;
 
 #실습 1-10
-select `prodname` , `price` as `조정단가` from `product`;
+select `prodname` , `price` + 500 as `조정단가` from `product`;
 
 #실습 1-11
-select `prodname`, `stock`, `price` from `product` 
+select `prodname`, `stock`, `price` from `product` where `company` = '오리온';
 
 #실습 1-12
-select `orderproduct`, `ordercount`, `orderdate` from `order`
+select `orderproduct`, `ordercount`, `orderdate` from `order` where `orderid` = 'c102';
 
 #실습 1-13
-select `orderproduct`, `ordercount`, `orderdate` from `order` and
+select `orderproduct`, `ordercount`, `orderdate` from `order` where `orderid ` = 'c102' and `ordercount` >= 2; 
 
 #실습 1-14
 select * from `product` where `price` <= 2000;
 
 #실습 1-15
-select `custid`, `name`, `hp`, `addr` from `customer` where `name` like 김 _ _;
+select `custid`, `name`, `hp`, `addr` from `customer` where `name` like '김%';
 
 #실습 1-16
-select `custid`, `name`, `hp`, `addr` from `customer` where `name` like 정_;
+select `custid`, `name`, `hp`, `addr` from `customer` where `name` like '__';
 
 #실습 1-17
-select * from `customer` where `hp` null;
+select * from `customer` where `hp` is null;
 
 #실습 1-18
-select * from `customer` where `addr`
+select * from `customer` where `addr` is not null;
 
 #실습 1-19
-select * from `customer` order by `` desc;
+select * from `customer` order by `rdate` desc;
 
 #실습 1-20
-select * from `order` where `ordercount` >= 3 order by `ordercount` desc;
+select * from `order` where `ordercount` >= 3 order by `ordercount` desc, `orderproduct` asc;
 
 #실습 1-21
 select avg() as `단가평균` from `product`;
 
 #실습 1-22
-select sum() as `재고량 합계` from `product` where `company`='농심';
+select sum(`company`) as `재고량 합계` from `product` where `company`='농심';
 
 #실습 1-23
-select as `고객수` from `customer`;
+select count(`custid`) as `고객수` from `customer`;
 
 #실습 1-24
-select count() as `제조업체 수` from `product`;
+select count(distinct `company`) as `제조업체 수` from `product`;
 
 #실습 1-25
-select `orderproduct` as `주문 상품번호`, sum(`ordercount`) as `총 주문수량` from `order`
+select `orderproduct` as `주문 상품번호`, sum(`ordercount`) as `총 주문수량` from `order` group by `orderproduct`;
 
 #실습 1-26
-select `company` as `제조업체`, count(*) as `제품수` , max(`price`) as `최고가` from `product`
+select `company` as `제조업체`, count(*) as `제품수` , max(`price`) as `최고가` from `product` group by `company`;
 
 #실습 1-27
-select `company` as `제조업체`, count(*) as `제품수` , max(`price`) as `최고가` from `product` group by `company`
+select `company` as `제조업체`, count(*) as `제품수` , max(`price`) as `최고가` from `product` group by `company` having `제품수` >= 2;
 
 #실습 1-28
-SELECT `orderProduct`, `orderId`, SUM(`orderCount`) AS `총 주문수량` FROM `Order`
+SELECT `orderProduct`, `orderId`, SUM(`orderCount`) AS `총 주문수량` FROM `Order` group by `orderproduct`, `orderid`;
 
 #실습 1-29
-select a.orderid, b.prodname from `order` as a 
-join 
-on
-where `orderid` = `c102`;
+select `a.orderid`, `b.prodname` from `order` as a 
+join `product` as b
+on a.orderproduct = b.prodno
+where `orderid` = 'c102';
 
 #실습 1-30
 SELECT `orderid`, `name`, `prodName`, `orderDate` FROM `Order` AS a
@@ -152,4 +152,4 @@ JOIN `Customer` AS b
 ON a.orderId = b.custId
 JOIN `Product` AS c
 ON a.orderProduct = c.prodNo
-WHERE 
+WHERE substr(`orderdate`, 1, 10) = '2022-';
