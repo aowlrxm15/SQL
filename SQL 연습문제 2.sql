@@ -98,9 +98,25 @@ SELECT * FROM `bank_customer` WHERE `c_dist` = 2;
 select * from `bank_transaction` where `t_dist` = 2;
 
 #실습2-14
+select * from `bank_transaction` where `t_dist` = 2 order by `t_amount` desc;
+
 #실습2-15
+select
+sum(`t_amount`) as `입금총합`, 
+avg(`t_amount`) as `입금평균`
+from `bank_transaction`
+where `t_dist`=1;
+
 #실습2-16
+select
+max(`t_amount`) as `큰 금액`,
+min(`t_amount`) as `작은 금액`
+from `bank_transaction`
+where `t_dist`=2;
+
 #실습2-17
+select * from `bank_account` where `a_item_name`='자유저축예금'  order by `a_balance` desc;
+
 #실습2-18
 #실습2-19
 #실습2-20
