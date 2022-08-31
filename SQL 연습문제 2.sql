@@ -95,7 +95,7 @@ select * from `bank_customer` where `c_addr` like '경기도%';
 SELECT * FROM `bank_customer` WHERE `c_dist` = 2;
 
 #실습2-13
-select * from `bank_transaction` where `t_dist` = 2;
+select * from `bank_transaction` where `t_dist` = 1;
 
 #실습2-14
 select * from `bank_transaction` where `t_dist` = 2 order by `t_amount` desc;
@@ -127,7 +127,7 @@ order by `t_dist`, `t_amount` desc;
 
 #실습2-20
 select
-	count(case when `t_dist`=1 then 1 end ) as `입금 건수`,
+	count(case when `t_dist`=1 then 1 end ) as `입금 건수`, #(if(`t_dist`=1, 1, null))
 	count(case when `t_dist`=2 then 2 end)  as `출금 건수`,
 	count(case when `t_dist`=3 then 3 end)  as `조회 건수`
 from `bank_transaction`; 
